@@ -13,14 +13,22 @@ export const allTeams: Team[] = [
 ];
 export const TeamService = {
   findById(id: number): Team | undefined {
-    return;
+    let data = allTeams.filter(e => e.id === id);
+    return data && data.length > 0 ? data[0] : undefined;
   },
   findAll(): Team[] {
-    return [];
+    return allTeams;
   },
   findByNameMatch(text: string): Team[] {
-    return [];
+    let data = allTeams.filter(e => e.name.toLowerCase() === text.toLowerCase());
+    return data && data.length > 0 ? data : [];
   },
-  add(team: Team): void {},
-  remove(id: number): void {},
+  add(team: Team): void {
+    allTeams.push(team);
+    return;
+  },
+  remove(id: number): void {
+    allTeams.splice(allTeams.findIndex(e => e.id === id), 1);
+    return;
+  },
 };
